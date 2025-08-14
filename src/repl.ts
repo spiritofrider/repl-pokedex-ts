@@ -1,7 +1,5 @@
 import { createInterface, Interface } from "node:readline";
-import { commandExit } from "./command_exit.js";
-import { commandHelp } from "./command_help.js";
-import type { CLICommand } from "./command.js";
+import { getCommands } from "./commands.js";
 
 export function cleanInput(input: string): string[] {
   return input
@@ -36,21 +34,6 @@ export function startREPL() {
     }
     rl.prompt();
   });
-}
-
-export function getCommands(): Record<string, CLICommand> {
-  return {
-    exit: {
-      name: "exit",
-      description: "Exits the pokedex",
-      callback: commandExit,
-    },
-    help: {
-        name: "help",
-        description: "Displays a help message",
-        callback: commandHelp,
-    }
-  };
 }
 
 function printsFirstWordBackToUser(line: string, rl: Interface) {
